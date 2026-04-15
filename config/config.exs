@@ -13,7 +13,12 @@ config :blog_graphql_api,
 # Configures the endpoint
 config :blog_graphql_api, BlogGraphqlApiWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "8u9pv0R08i4vxQ3bJ/iPjPmAru1yTg0WtN3Eoc3cDI9iMKGeSQovRJzU1VG5Z4v3",
+  secret_key_base:
+    System.get_env("SECRET_KEY_BASE") ||
+      raise("""
+      environment variable SECRET_KEY_BASE is missing.
+      You can generate one by calling: mix phx.gen.secret
+      """),
   render_errors: [view: BlogGraphqlApiWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: BlogGraphqlApi.PubSub, adapter: Phoenix.PubSub.PG2]
 

@@ -28,3 +28,6 @@ blog_graphql_api-*.tar
 /priv/static/
 
 .DS_Store
+
+# Production secrets — never commit
+/config/prod.secret.exs
